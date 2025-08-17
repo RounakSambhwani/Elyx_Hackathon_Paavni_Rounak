@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Reports Dashboard – Elyx Portal</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      background: #f7fafc;
+      font-family: "Montserrat", sans-serif;
+      color: #27385e;
+      margin: 0;
+      padding: 0;
+    }
+    nav {
+      background: #2176ae;
+      padding: 12px 20px;
+    }
+    nav a {
+      color: white;
+      margin-right: 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a.active {
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 20px auto 40px auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(44, 62, 80, 0.09);
+      padding: 34px 26px;
+    }
+    h1 {
+      font-size: 2.1rem;
+      margin-bottom: 12px;
+      color: #26446e;
+    }
+    p.section-desc {
+      color: #6b7280;
+      margin-bottom: 24px;
+    }
+
+    /* Performance Summary styles */
+    .summary-card {
+      background: #f9fbfe;
+      border-radius: 14px;
+      padding: 23px 18px 19px 18px;
+      box-shadow: 0 3px 18px rgba(33, 118, 174, 0.08);
+      margin-bottom: 36px;
+    }
+    .summary-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #2176ae;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .weeks-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      font-weight: 600;
+      font-size: 1.06rem;
+      color: #3a5998;
+    }
+    .weeks-select {
+      font-size: 1.07rem;
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 1.5px solid #74b9ff;
+      cursor: pointer;
+    }
+    .summary-metrics {
+      display: flex;
+      gap: 22px;
+      justify-content: center;
+      margin-top: 12px;
+    }
+    .metric-box {
+      background: #f6fafe;
+      border-radius: 10px;
+      padding: 24px 22px;
+      text-align: center;
+      min-width: 130px;
+      box-shadow: 0 1px 8px rgba(33, 118, 174, 0.07);
+      user-select: none;
+    }
+    .metric-box span {
+      display: block;
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: #2176ae;
+      margin-bottom: 5px;
+    }
+    .metric-box.green span {
+      color: #27ae60;
+    }
+    .metric-box.blue span {
+      color: #2988ca;
+    }
+    .metric-label {
+      font-size: 1.02rem;
+      color: #7b8da3;
+      font-weight: normal;
+    }
+    .progress-bar-label {
+      margin-left: 6px;
+      margin-top: 18px;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #27385e;
+      user-select: none;
+    }
+    .progress-bar-bg {
+      background: #e6eaf2;
+      border-radius: 7px;
+      width: 100%;
+      height: 15px;
+      margin: 8px 0 12px 0;
+      user-select: none;
+    }
+    .progress-bar-fill {
+      background: #2176ae;
+      height: 15px;
+      border-radius: 7px;
+      transition: width 0.4s;
+    }
+
+    /* Summary Box */
+    #weekSummaryBox {
+      background:#eef6fb;
+      border-left:4px solid #2176ae;
+      padding:14px 16px;
+      border-radius:8px;
+      margin-top:18px;
+      font-size:0.97rem;
+      line-height:1.5;
+      color:#374151;
+    }
+
+    /* Files grid styling */
+    .files-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+    }
+    .file-box {
+      background: #2176ae;
+      color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(33, 118, 174, 0.3);
+      width: 120px;
+      height: 90px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 1.1rem;
+      text-decoration: none;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+    .file-box:hover {
+      background: #2988ca;
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        padding: 20px 14px 40px;
+      }
+      .summary-metrics {
+        flex-direction: column;
+        gap: 14px;
+      }
+      .files-grid {
+        justify-content: center;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 🔹 Top Nav -->
+  <nav>
+    <a href="index.html">Profile</a>
+    <a href="reports.html" class="active">Reports</a>
+    <a href="Nutrient_Cycle_and_Sugar_Level_Tracker.html">Nutrient Cycle and Sugar Level Tracker</a>
+    <a href="Resilience_Tracker.html">Resilience Tracker</a>
+    <a href="Consultation_Time_Analysis.html">Consultation Time Analysis</a>
+  </nav>
+
+  <div class="container">
+    <h1>Patient Journey Reports</h1>
+    <p class="section-desc">Track progress and download weekly reports</p>
+
+    <!-- Performance Summary Section -->
+    <div class="summary-card">
+      <div class="summary-title">
+        <svg width="22" height="22" fill="#2176ae" style="margin-right: 5px" viewBox="0 0 20 20">
+          <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm.998 12V6h-2V4h2v10zm-2-2h2V6h-2v6z"></path>
+        </svg>
+        Treatment Journey Summary
+      </div>
+      <div class="weeks-row">
+        <label for="weekSelect">Week</label>
+        <select class="weeks-select" id="weekSelect"></select>
+        <span id="weeksTotal" style="font-size: 0.99rem; color: #5a6c8b; padding-left: 8px;">of 32</span>
+      </div>
+      <div class="summary-metrics" role="region" aria-label="Week Metrics">
+        <div class="metric-box blue" tabindex="0">
+          <span id="weeksCompleted">24</span>
+          <div class="metric-label">Weeks Completed</div>
+        </div>
+        <div class="metric-box green" tabindex="0">
+          <span id="progressScore">78%</span>
+          <div class="metric-label">Progress Score</div>
+        </div>
+        <div class="metric-box blue" tabindex="0">
+          <span id="milestones">5</span>
+          <div class="metric-label">Key Milestones</div>
+        </div>
+      </div>
+
+      <!-- 🔹 Summary Box -->
+      <div id="weekSummaryBox">
+        <strong>Week Summary:</strong> Select a week to view details.
+      </div>
+
+      <div class="progress-bar-label" id="progressBarLabel">Overall Progress</div>
+      <div class="progress-bar-bg" aria-hidden="true">
+        <div class="progress-bar-fill" id="progressBar" style="width: 75%" aria-valuemin="0" aria-valuemax="100" aria-valuenow="75" role="progressbar"></div>
+      </div>
+    </div>
+
+    <!-- Files Grid Section -->
+    <div class="files-grid" aria-label="Patient Weekly Reports Download Links">
+      <script>
+        for (let i = 1; i <= 32; i++) {
+          const fileName = `Week ${i}.docx`;
+          document.write(`
+            <a href="${fileName}" class="file-box" download="${fileName}" target="_blank" rel="noopener noreferrer">
+              Week ${i}
+            </a>
+          `);
+        }
+      </script>
+    </div>
+  </div>
+
+  <script>
+    const weekData = [
+      {completed:1,score:"3%",miles:0,bar:3,decision:"Created a personalized rehabilitation plan based on initial injury assessment.",why:"To set clear goals tailored to Aarav’s specific condition and guide effective recovery."},
+      {completed:2,score:"6%",miles:0,bar:6,decision:"Started gentle stretching and mobility exercises.",why:"To prevent muscle stiffness and encourage circulation without risking injury."},
+      {completed:3,score:"9%",miles:1,bar:9,decision:"Introduced anti-inflammatory nutrition adjustments.",why:"To reduce swelling and promote tissue repair through diet."},
+      {completed:4,score:"12%",miles:1,bar:12,decision:"Added resistance band exercises to physical therapy.",why:"To safely rebuild muscle strength and improve joint stability."},
+      {completed:5,score:"15%",miles:1,bar:15,decision:"Paused high-impact activities after mild pain flare-up.",why:"To prevent further injury and allow tissues to properly heal."},
+      {completed:6,score:"18%",miles:2,bar:18,decision:"Optimized meal plans to enhance energy and mood.",why:"To support overall rehabilitation adherence and recovery effectiveness."},
+      {completed:7,score:"22%",miles:2,bar:22,decision:"Introduced low-impact aerobic exercises.",why:"To build endurance and cardiovascular health without strain."},
+      {completed:8,score:"26%",miles:2,bar:26,decision:"Added aquatic therapy sessions.",why:"To reduce joint stress while improving aerobic capacity and strength."},
+      {completed:9,score:"30%",miles:3,bar:30,decision:"Incorporated mindfulness and breathing exercises.",why:"To help manage pain, reduce stress, and improve mental resilience."},
+      {completed:10,score:"34%",miles:3,bar:34,decision:"Adjusted resistance training to address muscle imbalances.",why:"To prevent compensatory injuries and improve functional strength."},
+      {completed:11,score:"38%",miles:3,bar:38,decision:"Conducted regular bloodwork monitoring to assess inflammation.",why:"To track progress objectively and inform therapy adjustments."},
+      {completed:12,score:"42%",miles:4,bar:42,decision:"Enhanced recovery nutrition protocols.",why:"To further support tissue healing and inflammation control."},
+      {completed:13,score:"46%",miles:4,bar:46,decision:"Increased physical therapy intensity.",why:"To encourage greater strength gains and improve joint mobility."},
+      {completed:14,score:"50%",miles:4,bar:50,decision:"Engaged peer support and mentorship.",why:"To boost motivation and provide accountability within recovery."},
+      {completed:15,score:"54%",miles:5,bar:54,decision:"Focused on endurance building and managing fatigue.",why:"To improve stamina for daily activities and prevent overtraining."},
+      {completed:16,score:"58%",miles:5,bar:58,decision:"Prioritized post-travel recovery and mental reset.",why:"To manage travel-related fatigue and maintain mental well-being."},
+      {completed:17,score:"62%",miles:5,bar:62,decision:"Optimized strength training regimen.",why:"To ensure sustainable strength development without injury risk."},
+      {completed:18,score:"66%",miles:6,bar:66,decision:"Regularly assessed immune and inflammation markers.",why:"To ensure rehabilitation supports systemic health and recovery."},
+      {completed:19,score:"70%",miles:6,bar:70,decision:"Included circular and cross-training exercises.",why:"To diversify physical activity and prevent overuse injuries."},
+      {completed:20,score:"74%",miles:6,bar:74,decision:"Focused nutrition on controlling inflammation.",why:"To support prolonged recovery and reduce flare-ups."},
+      {completed:21,score:"78%",miles:7,bar:78,decision:"Refined recovery strategies emphasizing mindfulness and sleep.",why:"To enhance healing through holistic lifestyle support."},
+      {completed:22,score:"82%",miles:7,bar:82,decision:"Increased peer mentoring and community engagement.",why:"To foster continuous motivation and emotional support."},
+      {completed:23,score:"86%",miles:7,bar:86,decision:"Maintained steady progress with confidence-building routines.",why:"To solidify gains and prepare for advanced rehabilitation stages."},
+      {completed:24,score:"89%",miles:8,bar:89,decision:"Sustained consistent training and nutrition regimen.",why:"To maintain recovery momentum and prevent regression."},
+      {completed:25,score:"90%",miles:8,bar:90,decision:"Managed soreness closely while intensifying training.",why:"To balance progression with injury prevention."},
+      {completed:26,score:"91%",miles:8,bar:91,decision:"Used blood testing and symptom tracking for adjustments.",why:"To personalize recovery and respond proactively to patient status."},
+      {completed:27,score:"91%",miles:8,bar:91,decision:"Focused on inflammation control and performance refinement.",why:"To improve quality of movement and overall function."},
+      {completed:28,score:"92%",miles:8,bar:92,decision:"Continued strength and endurance training steadily.",why:"To build lasting physical capacity for daily demands."},
+      {completed:29,score:"92%",miles:8,bar:92,decision:"Optimized recovery strategies to manage fatigue.",why:"To ensure sustainable rehabilitation and prevent burnout."},
+      {completed:30,score:"92%",miles:8,bar:92,decision:"Emphasized nutrition, hydration, sleep, and active rest.",why:"To support full body recovery and energy replenishment."},
+      {completed:31,score:"92%",miles:8,bar:92,decision:"Managed fatigue and enhanced adaptation with mindfulness.",why:"To improve mental resilience and physical readiness."},
+      {completed:32,score:"92%",miles:8,bar:92,decision:"Prepared for peak recovery and return to professional activities.",why:"To ensure readiness for sustained performance and long-term health."}
+    ];
+
+    const weekSelect = document.getElementById('weekSelect');
+    for (let i = 1; i <= 32; i++) {
+      const option = document.createElement('option');
+      option.value = i;
+      option.textContent = i;
+      if (i === 24) option.selected = true;
+      weekSelect.appendChild(option);
+    }
+
+    function updateSummary() {
+      const weekIndex = weekSelect.value - 1;
+      const data = weekData[weekIndex];
+      document.getElementById('weeksCompleted').textContent = data.completed;
+      document.getElementById('progressScore').textContent = data.score;
+      document.getElementById('milestones').textContent = data.miles;
+
+      const progressBarFill = document.getElementById('progressBar');
+      progressBarFill.style.width = data.bar + '%';
+      progressBarFill.setAttribute('aria-valuenow', data.bar);
+
+      document.getElementById('weekSummaryBox').innerHTML = `
+        <strong>Week ${weekIndex + 1} Summary:</strong><br>
+        <span style="color:#2176ae;">Decision:</span> ${data.decision}<br>
+        <span style="color:#27ae60;">Why:</span> ${data.why}
+      `;
+    }
+
+    window.addEventListener('load', () => {
+      updateSummary();
+    });
+
+    weekSelect.addEventListener('change', updateSummary);
+  </script>
+</body>
+</html>
+
+
+
+
+

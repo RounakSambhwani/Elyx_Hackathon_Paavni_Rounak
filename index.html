@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Aarav’s Health Journey | Elyx Portal</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2176ae;
+      --accent: #74b9ff;
+      --bg: #f7fafc;
+      --card: #fff;
+      --text-dark: #353b48;
+      --text-soft: #7b8da3;
+      --border-radius: 18px;
+    }
+    body { margin:0; background:var(--bg); font-family:'Montserrat',sans-serif; color:var(--text-dark);}
+    nav {
+      background: var(--primary);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 0 0 0;
+      box-shadow: 0 3px 18px rgba(44, 62, 80, 0.09);
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 18px 26px;
+      font-weight: 600;
+      font-size: 1.05rem;
+      border-bottom: 3px solid transparent;
+      transition: border 0.22s;
+    }
+    nav a.active,
+    nav a:hover {
+      border-bottom: 3px solid var(--accent);
+    }
+    .container {
+      max-width: 1150px;
+      margin: 32px auto;
+      padding: 24px 14px;
+      background: var(--card);
+      border-radius: var(--border-radius);
+      box-shadow: 0 8px 32px rgba(33, 118, 174, 0.08);
+    }
+    .profile-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 36px;
+      margin-bottom: 46px;
+      border-bottom: 2px solid #ececec;
+      padding-bottom: 30px;
+    }
+    .patient-photo {
+      width: 160px; height:160px; border-radius:50%; object-fit:cover;
+      box-shadow:0 4px 18px rgba(33,118,174,.13);
+      background: #eaf2fa;
+    }
+    .profile-desc {
+      flex:1 1 280px;
+    }
+    .profile-desc h1 {font-size:2.1rem;margin-bottom:2px;}
+    .profile-desc h3 {color:var(--primary);font-size:1.07rem;font-weight:600;margin-bottom:17px;}
+    .profile-desc p {font-size:1.13rem;color:var(--text-soft);line-height:1.56;}
+    .team-section {margin-top:44px;}
+    .team-section h2 {color:var(--primary);margin-bottom:34px;}
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(290px,1fr));
+      gap:28px;
+    }
+    .card {
+      background: #f9fbfe;
+      border-radius: 16px;
+      box-shadow:0 6px 16px rgba(33,118,174,.05);
+      padding:28px 18px 16px 18px;
+      text-align:center;
+    }
+    .card .avatar{margin:0 auto 13px auto;width:88px;height:88px;object-fit:cover;border-radius:50%;background:#e9ecef;border:2.5px solid var(--accent);}
+    .card h3{font-size:1.09rem;color:var(--primary);margin-bottom:5px;margin-top:7px;}
+    .card h4{font-size:.98rem;color:#49516f;margin-bottom:8px;}
+    .desc{font-size:.97rem;color:var(--text-soft);margin:0 0 3px 0;}
+    @media (max-width:800px){.profile-header{flex-direction:column;align-items:flex-start;gap:24px;}}
+    @media (max-width:600px){.team-grid{grid-template-columns:1fr;}.container{padding:10px 2px;}}
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="active">Profile</a>
+    <a href="reports.html">Reports</a>
+    <a href="Nutrient_Cycle_and_Sugar_Level_Tracker.html">Nutrient Cycle and Sugar Level Tracker</a>
+    <a href="Resilience_Tracker.html">Resilience Tracker</a>
+    <a href="Consultation_Time_Analysis.html">Consultation Time Analysis</a>
+  </nav>
+  <div class="container">
+    <div class="profile-header">
+      <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Aarav profile photo" class="patient-photo">
+      <div class="profile-desc">
+        <h1>Aarav Tan</h1>
+        <h3>Active Professional | Patient at Elyx</h3>
+        <p>
+          Aarav is a resilient, driven professional in his 30s who embarked on a comprehensive, holistic rehabilitation journey with Elyx after a sports injury. Navigating the challenges of recovery, travel, and work, Aarav’s openness to physiotherapy, nutrition, and mental wellness serves as an inspiring story of determination and growth.
+        </p>
+      </div>
+    </div>
+    <div class="team-section">
+      <h2>Your Elyx Concierge Team</h2>
+      <div class="team-grid">
+        <div class="card">
+          <img class="avatar" src="https://randomuser.me/api/portraits/men/45.jpg" alt="Rohan portrait">
+          <h3>Rohan</h3>
+          <h4>Concierge Coordinator</h4>
+          <div class="desc">Central point-of-contact, logistics and routine support for Aarav, ensuring seamless and caring coordination.</div>
+        </div>
+        <div class="card">
+          <img class="avatar" src="https://randomuser.me/api/portraits/women/46.jpg" alt="Dr. Ashwini Patel portrait">
+          <h3>Dr. Ashwini Patel</h3>
+          <h4>Medical Strategist</h4>
+          <div class="desc">Medical oversight, tracking clinical progress, and coordinating an evidence-based path to recovery.</div>
+        </div>
+        <div class="card">
+          <img class="avatar" src="https://randomuser.me/api/portraits/women/54.jpg" alt="Carla Fernandes portrait">
+          <h3>Carla Fernandes</h3>
+          <h4>Nutritionist</h4>
+          <div class="desc">Tailors anti-inflammatory and travel-proof meal strategies, empowering consistent nutrition and energy.</div>
+        </div>
+        <div class="card">
+          <img class="avatar" src="https://randomuser.me/api/portraits/women/12.jpg" alt="Rachel Singh portrait">
+          <h3>Rachel Singh</h3>
+          <h4>Physiotherapist</h4>
+          <div class="desc">Adaptive, energetic rehabilitation mentor focused on safe, progressive strength and mobility.</div>
+        </div>
+        <div class="card">
+          <img class="avatar" src="https://randomuser.me/api/portraits/men/51.jpg" alt="Neel Sethi portrait">
+          <h3>Neel Sethi</h3>
+          <h4>Concierge Lead</h4>
+          <div class="desc">Motivational and empathetic community builder, fostering peer support and accountability for Aarav.</div>
+        </div>
+        <div class="card">
+          <img class="avatar" src="https://randomuser.me/api/portraits/women/35.jpg" alt="Dr. Isha Menon portrait">
+          <h3>Dr. Isha Menon</h3>
+          <h4>Psychiatrist</h4>
+          <div class="desc">Guides mental resilience, mindfulness, and emotional support for sustainable, whole-person health.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
